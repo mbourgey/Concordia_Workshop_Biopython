@@ -97,3 +97,52 @@ for index, letter in enumerate(my_seq):
 > 8 G   
 > 9 G   
 > 10 T   
+
+```{.python}
+len(my_seq)
+```
+
+> 11
+
+The Seq object has a `.count()` method, just like a string. Note that this means that like a Python string, this gives a non-overlapping count
+
+```{.python}
+my_seq.count("A")
+```
+
+> 3
+
+```{.python}
+my_seq.count("GT")
+```
+
+> 2
+
+Note that this means that like a Python string, this gives a non-overlapping count:
+
+```{.python}
+Seq("AAAA").count("AA")
+```
+
+> 2
+
+####  Slicing a Seq object
+
+let’s get a slice of the sequence
+
+```{.python}
+my_seq[2:8]
+```
+
+> Seq('TACACT', IUPACUnambiguousDNA())
+
+Note that it follows the normal conventions for Python strings. 
+ - So the first element of the sequence is 0 (which is normal for computer science, but not so normal for biology).
+ - The first item is included i.e. 2 in this case (3rd aa)
+ - The last is excluded i.e 8 in this case (9th aa)
+
+###### Exercice
+
+**In one command could you extract the third codon positions of this DNA sequence ?**
+
+[solution](solutions/_codonExtract.md)
