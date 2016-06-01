@@ -174,7 +174,7 @@ p_seq + my_seq
 
 The `Seq` object is more than a python string with a specific alphabet, it also offers methods specific to facilitate the biology oriented analysis.
 
-#### complement and reverse complement
+#### Complement and reverse complement
 DNA is double stranded but in most case sequence are represented as single stranded molecules. for many purpose , i.e alignment, we need to compare a query sequence to reference sequence. In this case, we need to know if the reference sequence contains the query sequence in one or the other strands. 
 
 You can easily obtain the complement or reverse complement of a Seq object using its built-in methods:
@@ -197,10 +197,11 @@ my_seq.reverse_complement()
 There is no specific methods in Biopython to only reverse your sequence
 
 
-**Do you know why and how to preoceed ?** [solution](solutions/_reverse.md)
+**Do you know why and how to preoceed ?**   
+[solution](solutions/_reverse.md)
 
 
-Note that these methods only works for dna alphabet property is maintained. Trying to (reverse)complement a protein sequence will raise you an error:
+Note that these methods only work for dna alphabet. Trying to (reverse)complement a protein sequence will raise you an error:
 
 ```{.python}
 p_seq = Seq("EVRNAK", IUPAC.protein)
@@ -211,4 +212,41 @@ p_seq.reverse_complement()
 > Traceback (most recent call last):__ 
 > ...   
 > ValueError: Proteins do not have complements!
+
+#### Transcirption and reverse transcribe 
+First we need to clarify the transcription strand issue !   
+
+![Transcription strand](img/Transcription_strand.png)
+
+Biologically the transcription do a reverse complement of the template strand while inserting Uracile instead of Thymine (TCAG → CUGA) to give the RNA.
+
+However, in Biopython and bioinformatics in general, we typically work directly with the coding strand because this means we can get the mRNA sequence just by switching T → U
+
+Let's do a simple transcription of our sequence:
+
+```{.python}
+r_seq=my_seq.transcribe()
+r_seq
+
+```
+
+> Seq('AGUACACUGGU', IUPACUnambiguousRNA())
+
+And a reverse transcription of the resulting sequence:
+
+
+```{.python}
+r_seq.back_transcribe()
+
+```
+> Seq('AGTACACTGGT', IUPACUnambiguousDNA())
+
+As you can see, all this does is switch T -> U or U -> T and adjust the alphabet.
+
+
+###### Exercice
+
+**Could you generate the mRNA from this template strand sequence:  __3'-TACCGGTAACATTACCCGGCGACTTTCCCACGGGCTATC-5'__ ?**  
+
+[solution](solutions/_mRNA.md)
 
