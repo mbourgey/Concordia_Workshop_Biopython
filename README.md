@@ -23,19 +23,19 @@ The Biopython `Seq` object is defined in the `Bio.Seq` module
 
 The `Seq` object is different from traditional python strings:  
 
- 1 It supports most of the string methods but it also comes with its specifc set of methods
- 
+ 1. It supports most of the string methods but it also comes with its specifc set of methods
   * translate() _- Turns a nucleotide sequence into a protein sequence._
   * reverse_complement() _- Returns the reverse complement sequence._
   * complement() _- Returns the complement sequence._
   * transcribe() _-Returns the RNA sequence from a DNA sequence._
   * back_transcribe() _- Returns the DNA sequence from an RNA sequence._
   * ungap() _- Return a copy of the sequence without the gap character(s)._
-  
- 2 It has an important attribute, the alphabet, which is an object describing the type of the sequence and how the characters should be interpreted. Biopython alphabet are define in the `Bio.Alphabet` module
+ 2. It has an important attribute, the alphabet, which is an object describing the type of the sequence and how the characters should be interpreted. Biopython alphabet are define in the `Bio.Alphabet` module
 
  
 [The detail API of the `Seq` object](http://biopython.org/DIST/docs/api/Bio.Seq.Seq-class.html)
+
+
 [The detail API of the `Alphabet` object](http://biopython.org/DIST/docs/api/Bio.Alphabet-module.html)
  
 ### Sequence Manipulation
