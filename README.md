@@ -68,10 +68,32 @@ my_seq = Seq("AGTACACTGGT", IUPAC.unambiguous_dna)
 my_seq
 ```
 
-=> `Seq('AGTACACTGGT', IUPACUnambiguousDNA())``
+=> `Seq('AGTACACTGGT', IUPACUnambiguousDNA())`
 
 ```{.python}
 my_seq.alphabet
 ```
 
 => `IUPACUnambiguousDNA()`
+
+####  Seq as python strings
+
+In many ways, we can deal with Seq objects as if they were normal Python strings, for example getting the length, or iterating over the elements
+
+```{.python}
+for index, letter in enumerate(my_seq):
+   print("%i %s" % (index, letter))
+
+```
+
+=> `0 A
+1 G
+2 T
+3 A
+4 C
+5 A
+6 C
+7 T
+8 G
+9 G
+10 T`
