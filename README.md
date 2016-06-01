@@ -213,7 +213,7 @@ p_seq.reverse_complement()
 > ...   
 > ValueError: Proteins do not have complements!
 
-#### Transcirption and reverse transcribe 
+#### Transcirption, reverse transcription and translation 
 First we need to clarify the transcription strand issue !   
 
 ![Transcription strand](img/Transcription_strand.png)
@@ -246,7 +246,52 @@ As you can see, all this does is switch T -> U or U -> T and adjust the alphabet
 
 ###### Exercice
 
-**Could you generate the mRNA from this template strand sequence:  __3'-TACCGGTAACATTACCCGGCGACTTTCCCACGGGCTATC-5'__ ?**  
+**Could you generate the mRNA from this template strand sequence: __3'-TACCGGTAACATTACCCGGCGACTTTCCCACGGGCTATC-5'__ ?**  
 
 [solution](solutions/_mRNA.md)
+
+
+Now let’s translate this mRNA into the corresponding protein sequence 
+
+```{.python}
+p_seq = r_seq.translate()
+p_seq
+```
+
+> Seq('MAIVMGR*KGAR*', HasStopCodon(IUPACProtein(), '*'))
+
+Note that Biopython also allow to directly translate from DNA sequence. In this case use the coding strand DNA sequence.
+
+You should also notice in the above protein sequences that in addition to the end stop character, there is an internal stop as well. This is due to the use of the wrong translation table in this case.
+
+The translation tables available in Biopython are based on those from the [NCBI](http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi). By default, translation will use the standard genetic code (NCBI table id 1). 
+
+In our case, we are dealing with a mitochondrial sequence. We need to tell the translation function to use the relevant genetic code instead:
+
+```{.python}
+p_seq = r_seq.translate(table="Vertebrate Mitochondrial")
+p_seq
+```
+
+> Seq('MAIVMGRWKGAR*', HasStopCodon(IUPACProtein(), '*'))
+
+Also you may want to translate the nucleotides up to the first in frame stop codon, and then stop. In this case you should use to_stop method:
+
+
+```{.python}
+r_seq.translate(to_stop=True)
+```
+
+> Seq('MAIVMGR', IUPACProtein())
+
+```{.python}
+r_seq.translate(table=2, to_stop=True)
+```
+
+> Seq('MAIVMGRWKGAR', IUPACProtein())
+
+Notice that when you use the to_stop argument, the stop codon itself is not translated, Notice also that you can specify the table using the NCBI table number which is shorter.
+
+## The SeqRecord object
+
 

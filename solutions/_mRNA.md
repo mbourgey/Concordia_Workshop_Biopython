@@ -11,7 +11,8 @@ template_dna
 > Seq('CTATCGGGCACCCTTTCAGCGGCCCATTACAATGGCCAT', IUPACUnambiguousDNA())
 
 ```{.python}
-template_dna.reverse_complement().transcribe()
+r_seq=template_dna.reverse_complement().transcribe()
+r_seq
 ```
 
 > Seq('AUGGCCAUUGUAAUGGGCCGCUGAAAGGGUGCCCGAUAG', IUPACUnambiguousRNA())
