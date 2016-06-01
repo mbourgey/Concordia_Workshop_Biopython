@@ -2,8 +2,9 @@
 
 # Concordia Python workshop - module 3 - Intorduction to Biopython   
 
- 
-by Mathieu Bourgey, _Ph.D_
+by Mathieu Bourgey, _Ph.D_  
+
+This Workshop is an adaptation of the [general Biopython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
 
 ## Learning objectives
 During this wiorkshop you will learn:  
@@ -147,6 +148,67 @@ Note that it follows the normal conventions for Python strings.
 
 [solution](solutions/_codonExtract.md)
 
+#### concatenate sequence
+You can in principle add any two Seq objects together just like you can with Python strings. But `Seq` object are made for biological data so you the concatenation method only accept to merge sequences with compatible alphabets. You are allowed to concatenate a protein sequence and a DNA sequence.
+
+```{.python}
+p_seq = Seq("EVRNAK", IUPAC.protein)
+d_seq = Seq('TACACT', IUPAC.unambiguous_dna)
+d_seq + my_seq
+```
+
+> Seq('TACACTAGTACACTGGT', IUPACUnambiguousDNA())
+
+
+```{.python}
+p_seq + my_seq
+```
+
+> Traceback (most recent call last):   
+> ...   
+> TypeError: Incompatible alphabets IUPACProtein() and IUPACUnambiguousDNA()
+
+**If you __realy__ want to do that, how should you do ?** [solution](solutions/_concate.md)
+
 ####  Seq as Biological strings
 
+The `Seq` object is more than a python string with a specific alphabet, it also offers methods specific to facilitate the biology oriented analysis.
+
+#### complement and reverse complement
+DNA is double stranded but in most case sequence are represented as single stranded molecules. for many purpose , i.e alignment, we need to compare a query sequence to reference sequence. In this case, we need to know if the reference sequence contains the query sequence in one or the other strands. 
+
+You can easily obtain the complement or reverse complement of a Seq object using its built-in methods:
+
+```{.python}
+my_seq.complement()
+
+```
+
+> Seq('TCATGTGACCA', IUPACUnambiguousDNA())
+
+```{.python}
+my_seq.reverse_complement()
+
+```
+
+> Seq('ACCAGTGTACT', IUPACUnambiguousDNA())
+
+
+There is no specific methods in Biopython to only reverse your sequence
+
+
+**Do you know why and how to preoceed ?** [solution](solutions/_reverse.md)
+
+
+Note that these methods only works for dna alphabet property is maintained. Trying to (reverse)complement a protein sequence will raise you an error:
+
+```{.python}
+p_seq = Seq("EVRNAK", IUPAC.protein)
+p_seq.reverse_complement()
+
+ ```
  
+> Traceback (most recent call last):__ 
+> ...   
+> ValueError: Proteins do not have complements!
+
