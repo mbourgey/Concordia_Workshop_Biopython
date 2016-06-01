@@ -49,13 +49,13 @@ my_seq = Seq("AGTACACTGGT")
 my_seq
 ```
 
-Seq('AGTACACTGGT', Alphabet())
+=> `Seq('AGTACACTGGT', Alphabet())`
 
 ```{.python}
 my_seq.alphabet
 ```
 
-Alphabet()
+=> `Alphabet()`
 
 In the above example, we haven't specified an alphabet so we end up with
 a default generic alphabet. Biopython doesn't know if this is a
@@ -68,10 +68,10 @@ my_seq = Seq("AGTACACTGGT", IUPAC.unambiguous_dna)
 my_seq
 ```
 
-``Seq('AGTACACTGGT', IUPACUnambiguousDNA())``
+=> `Seq('AGTACACTGGT', IUPACUnambiguousDNA())``
 
 ```{.python}
 my_seq.alphabet
 ```
 
-``IUPACUnambiguousDNA()``
+=> `IUPACUnambiguousDNA()`
