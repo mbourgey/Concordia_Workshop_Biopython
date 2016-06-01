@@ -146,3 +146,7 @@ Note that it follows the normal conventions for Python strings.
 **In one command could you extract the third codon positions of this DNA sequence ?**
 
 [solution](solutions/_codonExtract.md)
+
+####  Seq as Biological strings
+
+ 
