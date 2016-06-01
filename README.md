@@ -56,3 +56,22 @@ my_seq.alphabet
 ```
 
 Alphabet()
+
+In the above example, we haven't specified an alphabet so we end up with
+a default generic alphabet. Biopython doesn't know if this is a
+nucleotide sequence or a protein rich in alanines, glycines, cysteines
+and threonines. If *you* know, you should supply this information
+
+```{.python}
+from Bio.Alphabet import IUPAC
+my_seq = Seq("AGTACACTGGT", IUPAC.unambiguous_dna)
+my_seq
+```
+
+``Seq('AGTACACTGGT', IUPACUnambiguousDNA())``
+
+```{.python}
+my_seq.alphabet
+```
+
+``IUPACUnambiguousDNA()``
