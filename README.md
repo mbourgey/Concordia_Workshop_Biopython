@@ -87,13 +87,23 @@ for index, letter in enumerate(my_seq):
 ```
 
 > 0 A
+
 > 1 G
+
 > 2 T
+
 > 3 A
+
 > 4 C
+
 > 5 A
+
 > 6 C
+
 > 7 T
+
 > 8 G
+
 > 9 G
+
 > 10 T
