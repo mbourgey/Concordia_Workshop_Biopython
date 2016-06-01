@@ -86,7 +86,7 @@ for index, letter in enumerate(my_seq):
 
 ```
 
-=> ```0 A  
+=> ```0 A<\br>
 1 G  
 2 T  
 3 A  
