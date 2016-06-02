@@ -342,6 +342,40 @@ simple_seq_r
 
 Including an identifier is very important if you want to output your SeqRecord to a file.
 
+The `SeqRecord` has an dictionary attribute annotations. This is used for any miscellaneous annotations that doesn’t fit under one of the other more specific attributes. Adding annotations is easy, and just involves dealing directly with the annotation dictionary:
+
+```{.python}
+simple_seq_r.annotations["evidence"] = "None. I just made it up."
+simple_seq_r.annotations
+
+```
+> {'evidence': 'None. I just made it up.'}
+
+Working with per-letter-annotations is similar, letter_annotations is a dictionary like attribute which will let you assign any Python sequence (i.e. a string, list or tuple) which has the same length as the sequence.
+
+```{.python}
+import random
+import string
+simple_seq_r.letter_annotations["phred_quality"] = ''.join(random.choice(string.ascii_uppercase) for i in range(len(simple_seq_r)))
+simple_seq_r.letter_annotations
+
+```
+
+> {'phred_quality': 'PKZANAGWPPK'}
+
+The `format()` method of the `SeqRecord` class gives a string containing your record formatted using one of the output file formats supported. 
+
+```{.python}
+simple_seq_r.format('fasta')
+
+```
+> 
+
+```{.python}
+simple_seq_r.format('fastq')
+```
+
+> 
 
 ## The SeqIO Class
 
