@@ -355,13 +355,12 @@ Working with per-letter-annotations is similar, letter_annotations is a dictiona
 
 ```{.python}
 import random
-import string
-simple_seq_r.letter_annotations["phred_quality"] = ''.join(random.choice(string.ascii_uppercase) for i in range(len(simple_seq_r)))
+simple_seq_r.letter_annotations["phred_quality"] =  random.sample(xrange(1, 50),len(simple_seq_r))
 simple_seq_r.letter_annotations
 
 ```
 
-> {'phred_quality': 'PKZANAGWPPK'}
+> {'phred_quality': [22, 23, 3, 2, 29, 11, 34, 44, 5, 33, 16]}
 
 The `format()` method of the `SeqRecord` class gives a string containing your record formatted using one of the output file formats supported. 
 
@@ -369,13 +368,13 @@ The `format()` method of the `SeqRecord` class gives a string containing your re
 simple_seq_r.format('fasta')
 
 ```
-> 
+> '>THX1138 Made up sequence I wish I could write a paper about\nAGTACACTGGT\n'
 
 ```{.python}
 simple_seq_r.format('fastq')
 ```
 
-> 
+> '@THX1138 Made up sequence I wish I could write a paper about\nAGTACACTGGT\n+\n78$#>,CM&B1\n'
 
 ## The SeqIO Class
 
