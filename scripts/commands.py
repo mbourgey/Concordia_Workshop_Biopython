@@ -49,8 +49,7 @@ simple_seq_r.annotations["evidence"] = "None. I just made it up."
 simple_seq_r.annotations
 
 import random
-import string
-simple_seq_r.letter_annotations["phred_quality"] = ''.join(random.choice(string.ascii_uppercase) for i in range(len(simple_seq_r)))
+simple_seq_r.letter_annotations["phred_quality"] = random.sample(xrange(1, 50),len(simple_seq_r))
 simple_seq_r.letter_annotations
 
 simple_seq_r.format('fasta')

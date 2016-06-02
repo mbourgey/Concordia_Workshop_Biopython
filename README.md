@@ -377,6 +377,132 @@ simple_seq_r.format('fastq')
 > '@THX1138 Made up sequence I wish I could write a paper about\nAGTACACTGGT\n+\n78$#>,CM&B1\n'
 
 ## The SeqIO Class
+The `SeqIO` Class provide a simple interface for working with assorted sequence file formats in a uniform way.
+
+The “catch” is that you have to work with `SeqRecord` objects, which contain a `Seq` object with format specific annotation like an identifier and description.
+
+
+[The detail API of the `SeqIO` module](http://biopython.org/DIST/docs/api/Bio.SeqIO-module.html)
+
+### Reading or parsing sequence files 
+
+The main method of the `SeqIO` module is __.parse()__  is used to read in sequence data as `SeqRecord` objects. This function expects two arguments:
+
+    1. A handle to read the data from, or a filename.
+    2. A lower case string specifying sequence format. See http://biopython.org/wiki/SeqIO for a full listing of supported formats. 
+    
+There is an optional argument alphabet to specify the alphabet to be used. This is useful for file formats like FASTA where otherwise Bio.SeqIO will default to a generic alphabet.
+
+The __.parse()__ methods is typically used with a for loop like this:
+
+```{.python}
+from Bio import SeqIO
+for seq_record in SeqIO.parse("data/NC_000913.fna","fasta"):
+    print(seq_record.id)
+    print(repr(seq_record.seq))
+    print(len(seq_record))
+    print(len(seq_record.features))
+
+```
+
+> gi|556503834|ref|NC_000913.3|   
+> Seq('AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAG...TTC', SingleLetterAlphabet())   
+> 4641652   
+> 0
+
+
+If instead you wanted to load a GenBank format:
+
+```{.python}
+for seq_record in SeqIO.parse("data/NC_000913.gbk","genbank"):
+    print(seq_record.id)
+    print(repr(seq_record.seq))
+    print(len(seq_record))
+    print(len(seq_record.features))
+
+```
+
+> gi|556503834|ref|NC_000913.3|   
+> Seq('AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAG...TTC', SingleLetterAlphabet())   
+> 4641652   
+> 22996 
+
+
+Notice that in the 2 examples the `SeqRecord` object contain the same central information and that mostly the difference is in the amount of information provided in the annotations (__.features__) 
+
+Similarly, if you wanted to read in a file in another file format, you would just need to change the format string as appropriate. For example “swiss” for SwissProt files or “embl” for EMBL text files. There is a full listing on the [Biopython wiki page](http://biopython.org/wiki/SeqIO)
+
+Another very common way to use a Python iterator is within a list comprehension
+
+```{.python}
+identifiers = [seq_record.id for seq_record in SeqIO.parse("data/patato_pep.fasta","fasta")]
+identifiers
+
+```
+
+> ['PGSC0003DMP400067339', 'PGSC0003DMP400027454', 'PGSC0003DMP400020381', 'PGSC0003DMP400022612', 'PGSC0003DMP400040011', 'PGSC0003DMP400032361', 'PGSC0003DMP400030628', 'PGSC0003DMP400028584', 'PGSC0003DMP400060824', 'PGSC0003DMP400037883']
+
+We usually use a for loop to iterate over all the records one by one. The object returned by `SeqIO` is actually an iterator which returns `SeqRecord` objects. You get to access each record in turn, but once and only once. The plus point is that an iterator can save you memory when dealing with large files.
+
+Sometime you need to be able to access the records in any order. In that case you could acces the records using a list or dictionary process. But be carefull because you could easily carsh or slowdown python when using this methods on large data sets.
+
+#### The list approach
+We can turn the record iterator into a list of SeqRecord objects using the built-in Python function __list()__ 
+
+
+```{.python}
+records = list(SeqIO.parse("data/patato_pep.fasta","fasta"))
+records[3]
+```
+
+> SeqRecord(seq=Seq('MLPFESIEEASMSLGRNLTFGETLWFNYTADKSDFYLYCHNTIFLIIFYSLVPL...SE*', SingleLetterAlphabet()), id='PGSC0003DMP400022612', name='PGSC0003DMP400022612', description='PGSC0003DMP400022612 PGSC0003DMT400033236 Protein', dbxrefs=[])
+
+#### The dictionary approach
+`SeqIO` module has three related functions which allow dictionary like random access to a multi-sequence file. There is a trade off here between flexibility and memory usage. In summary:  
+
+   - `.to_dict()` is the most flexible but also the most memory demanding option. This is basically a helper function to build a normal Python dictionary with each entry held as a SeqRecord object in memory, allowing you to modify the records.
+   -  `.index()` is a useful middle ground, acting like a read only dictionary and parsing sequences into SeqRecord objects on demand.
+   - `.index_db()` also acts like a read only dictionary but stores the identifiers and file offsets in a file on disk (as an SQLite3 database), meaning it has very low memory requirements, but will be a little bit slower. 
+
+
+Let's test the different functions
+
+You can use the function `.to_dict()` to make a SeqRecord dictionary (in memory). By default this will use each record’s identifier (i.e. the .id attribute) as the key
+
+```{.python}
+records_dict = SeqIO.to_dict(SeqIO.parse("data/patato_pep.fasta","fasta"))
+records_dict.keys()
+
+```
+
+> ['PGSC0003DMP400030628', 'PGSC0003DMP400032361', 'PGSC0003DMP400027454', 'PGSC0003DMP400060824', 'PGSC0003DMP400040011', 'PGSC0003DMP400037883', 'PGSC0003DMP400022612', 'PGSC0003DMP400020381', 'PGSC0003DMP400067339', 'PGSC0003DMP400028584']
+
+```{.python}
+records_dict['PGSC0003DMP400020381']
+```
+
+> SeqRecord(seq=Seq('MLEKDSRDDRLDCVFPSKHDKDSVEEVSSLSSENTRTSNDCSRSNNVDSISSEV...KY*', SingleLetterAlphabet()), id='PGSC0003DMP400020381', name='PGSC0003DMP400020381', description='PGSC0003DMP400020381 PGSC0003DMT400029984 Protein', dbxrefs=[])
+
+`.to_dict()` is very flexible because it holds everything in memory. The size of file you can work with is limited by your computer’s RAM. In general, this will only work on small to medium files.
+
+For larger files you should consider `.index()`, which works a little differently. Although it still returns a dictionary like object, this does not keep everything in memory. Instead, it just records where each record is within the file and when you ask for a particular record, it then parses it on demand.
+
+
+```{.python}
+records_dict = SeqIO.index("data/patato_pep.fasta","fasta")
+records_dict.keys()
+
+```
+
+> ['PGSC0003DMP400030628', 'PGSC0003DMP400032361', 'PGSC0003DMP400027454', 'PGSC0003DMP400060824', 'PGSC0003DMP400040011', 'PGSC0003DMP400037883', 'PGSC0003DMP400022612', 'PGSC0003DMP400020381', 'PGSC0003DMP400067339', 'PGSC0003DMP400028584']
+
+```{.python}
+records_dict['PGSC0003DMP400020381']
+```
+
+> SeqRecord(seq=Seq('MLEKDSRDDRLDCVFPSKHDKDSVEEVSSLSSENTRTSNDCSRSNNVDSISSEV...KY*', SingleLetterAlphabet()), id='PGSC0003DMP400020381', name='PGSC0003DMP400020381', description='PGSC0003DMP400020381 PGSC0003DMT400029984 Protein', dbxrefs=[])
+
+
 
 
 ## The Blast Class
