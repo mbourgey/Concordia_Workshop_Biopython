@@ -293,5 +293,61 @@ r_seq.translate(table=2, to_stop=True)
 Notice that when you use the to_stop argument, the stop codon itself is not translated, Notice also that you can specify the table using the NCBI table number which is shorter.
 
 ## The SeqRecord object
+Immediately “above” the `Seq` class is the Sequence Record or `SeqRecord` class, defined in the `Bio.SeqRecord` module. This class allows higher level features to be associated with the sequence.
 
+[The detail API of the `SeqRecord` object](http://biopython.org/DIST/docs/api/Bio.SeqRecord.SeqRecord-class.html)
+
+A SeqRecord object holds a sequence and information about it.
+
+**Main attributes:**
+
+        * .id - Identifier such as a locus tag or an accesion number (string)
+        * .seq - The sequence itself (Seq object or similar)
+
+**Additional attributes:**
+
+        * .name - Sequence name, e.g. gene name (string)
+        * .description - A human readable description or expressive name for the sequence (string)
+        * .letter_annotations - Per letter/symbol annotation (restricted dictionary). This holds Python sequences (lists, strings or tuples) whose length matches that of the sequence. A typical use would be to hold a list of integers representing sequencing quality scores, or a string representing the secondary structure.
+        * .features - Any (sub)features defined (list of `SeqFeature` objects), i.e location, type or strand...
+        * .annotations - Further information about the whole sequence (dictionary). Most entries are strings, or lists of strings. This allows the addition of more “unstructured” information to the sequence.
+        * .dbxrefs - List of database cross references (list of strings)
+
+Using a `SeqRecord` object is not very complicated, since all of the information is presented as attributes of the class. Usually you won’t create a `SeqRecord` “by hand”, but instead you a specific Class to read in a sequence file for you (presented in the next section). However, creating `SeqRecord` can be quite simple.
+
+
+### Manually creating a seqRecord
+
+To create a `SeqRecord` at a minimum you just need a `Seq` object:
+
+```{.python}
+from Bio.SeqRecord import SeqRecord
+simple_seq_r = SeqRecord(my_seq)
+simple_seq_r
+
+```
+> SeqRecord(seq=Seq('AGTACACTGGT', IUPACUnambiguousDNA()), id='<unknown id>', name='<unknown name>', description='<unknown description>', dbxrefs=[])
+
+We can also manually pass the id, name and description to the object
+
+```{.python}
+simple_seq_r.id = "THX1138"
+simple_seq_r.name = "THX 1138 4EB"
+simple_seq_r.description = "Made up sequence I wish I could write a paper about"
+simple_seq_r
+
+```
+
+> SeqRecord(seq=Seq('AGTACACTGGT', IUPACUnambiguousDNA()), id='THX1138', name='THX 1138 4EB', description='Made up sequence I wish I could write a paper about', dbxrefs=[])
+
+Including an identifier is very important if you want to output your SeqRecord to a file.
+
+
+## The SeqIO Class
+
+
+## The Blast Class
+
+
+## The Entrez Object
 
