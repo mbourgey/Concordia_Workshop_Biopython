@@ -534,7 +534,7 @@ patato_pep['PGSC0003DMP400040011']
 
 **So, which of these methods should you use and why ?** [solution](solutions/_seqIO1.md) 
 
-### writing sequence files
+### Writing sequence files
 
 The `.write()` is used to output sequences (writing files). This function taking three arguments: 
 
@@ -550,7 +550,7 @@ SeqIO.write(simple_seq_r, "testOut.fa",  "fasta")
 os.system("cat testOut.fa")
 
 ```
-> >THX1138 Made up sequence I wish I could write a paper about   
+> \>THX1138 Made up sequence I wish I could write a paper about   
 > AGTACACTGGT
 
 then, let's write a set of patato sequences into the file __testOut.fa__ :
@@ -562,7 +562,7 @@ for seq_record in SeqIO.parse("data/patato_pep.fasta","fasta") :
 os.system("cat testOut.fa")
 
 ```
-> >PGSC0003DMP400037883 PGSC0003DMT400056292 Protein   
+> \>PGSC0003DMP400037883 PGSC0003DMT400056292 Protein   
 > MMIGRDPEIWENPEEFIPERFLNSDIDYFKGQNFELIPFGAGRRGCPGIALGVATINLIL   
 > SNLLYAFDWELPHGMIKEDIDTDGLPGLAMHKKNALCLVPKNYTHT*
 
