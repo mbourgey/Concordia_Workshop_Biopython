@@ -776,28 +776,17 @@ During this workshop we only scratch the surface of the full potential of Biopyt
 |module|task|
 |---|---|
 |Bio.Aff|Deal with Affymetrix related data such as cel files|
-|---|---|
 |Bio.Align|Code for dealing with sequence alignments|
-|---|---|
 |Bio.Emboss|Code to interact with the EMBOSS programs|
-|---|---|
 |Bio.Entrez|Provides code to access NCBI over the WWW|
 |Bio.HMM|A selection of Hidden Markov Model code|
-|---|---|
 |Bio.KDTree|KD tree data structure for searching N-dimensional vectors|
-|---|---|
 |Bio.KEGG|This module provides code to work with data from the KEGG database|
-|---|---|
 |Bio.PDB|Classes that deal with macromolecular crystal structures|
-|---|---|
 |Bio.Pathway|BioPython Pathway module|
-|---|---|
 |Bio.Phylo|Package for working with phylogenetic trees|
-|---|---|
 |Bio.PopGen|PopGen: Population Genetics and Genomics library in Python|
-|---|---|
 |Bio.SeqUtils|Miscellaneous functions for dealing with sequences|
-|---|---|
 |...||
 
 **I strongly encourage you to look at he full list of module and to explore those you found relevent with your own research.**
