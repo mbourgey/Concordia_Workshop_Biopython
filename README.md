@@ -485,6 +485,8 @@ records_dict['PGSC0003DMP400020381']
 
 `.to_dict()` is very flexible because it holds everything in memory. The size of file you can work with is limited by your computer’s RAM. In general, this will only work on small to medium files.
 
+---------------
+
 For larger files you should consider `.index()`, which works a little differently. Although it still returns a dictionary like object, this does not keep everything in memory. Instead, it just records where each record is within the file and when you ask for a particular record, it then parses it on demand.
 
 
@@ -496,6 +498,8 @@ list(records_dict.keys())
 
 > ['PGSC0003DMP400030628', 'PGSC0003DMP400032361', 'PGSC0003DMP400027454', 'PGSC0003DMP400060824', 'PGSC0003DMP400040011', 'PGSC0003DMP400037883', 'PGSC0003DMP400022612', 'PGSC0003DMP400020381', 'PGSC0003DMP400067339', 'PGSC0003DMP400028584']
 
+Note that in this case the `.keys()` function return an iterator and we need to use the list function to get the key values
+
 ```{.python}
 records_dict['PGSC0003DMP400020381']
 ```
@@ -503,6 +507,8 @@ records_dict['PGSC0003DMP400020381']
 > SeqRecord(seq=Seq('MLEKDSRDDRLDCVFPSKHDKDSVEEVSSLSSENTRTSNDCSRSNNVDSISSEV...KY*', SingleLetterAlphabet()), id='PGSC0003DMP400020381', name='PGSC0003DMP400020381', description='PGSC0003DMP400020381 PGSC0003DMT400029984 Protein', dbxrefs=[])
 
 Note that `.index()` won’t take a handle, but only a filename. 
+
+-----------------
 
 `.index_db()` work on even extremely large files since it stores the record information as a file on disk (using an SQLite3 database) rather than in memory. Also, we can index multiple files together (providing all the record identifiers are unique).
 
@@ -512,7 +518,18 @@ Note that `.index()` won’t take a handle, but only a filename.
     - List of sequence filenames to index (or a single filename)
     - File format (lower case string as used in the rest of the SeqIO module). 
     
-TO DO example
+```{.python}
+patato_pep = SeqIO.index_db("patato_pep.idx", "data/patato_pep.fasta","fasta")
+patato_pep.keys()
+```
+
+> ['PGSC0003DMP400020381', 'PGSC0003DMP400022612', 'PGSC0003DMP400027454', 'PGSC0003DMP400028584', 'PGSC0003DMP400030628', 'PGSC0003DMP400032361', 'PGSC0003DMP400037883', 'PGSC0003DMP400040011', 'PGSC0003DMP400060824', 'PGSC0003DMP400067339']
+
+```{.python}
+patato_pep['PGSC0003DMP400040011']
+```
+
+> SeqRecord(seq=Seq('MECDTEDSEDNSNIQADSNHRLVKFVIPGNNLLDQTKSSSTKVVLIFLESVEIL...NF*', SingleLetterAlphabet()), id='PGSC0003DMP400040011', name='PGSC0003DMP400040011', description='PGSC0003DMP400040011 PGSC0003DMT400059441 Protein', dbxrefs=[])
 
 
 **So, which of these methods should you use and why ?** [solution](solutions/_seqIO1.md) 
