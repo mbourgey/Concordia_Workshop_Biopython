@@ -94,4 +94,30 @@ for seq_record in SeqIO.parse("data/patato_pep.fasta","fasta") :
 os.system("cat testOut.fa")
 
 from Bio.Blast import NCBIWWW
-result_handle = NCBIWWW.qblast("blastp", "nr", seq_record.seq)
+result_handle = NCBIWWW.qblast("blastp", "nr", patato_pep['PGSC0003DMP400040011'].seq)
+result_handle = NCBIWWW.qblast("blastn", "nr", patato_pep['PGSC0003DMP400040011'].format("fasta"))
+save_file = open("my_blast.xml", "w")
+save_file.write(result_handle.read())
+save_file.close()
+os.system("head my_blast.xml")
+result_handle.read()
+result_handle.close()
+result_handle.read()
+result_handle = open("my_blast.xml")
+from Bio.Blast import NCBIXML
+blast_record = NCBIXML.read(result_handle)
+result_handle.seek(0)
+blast_records = NCBIXML.parse(result_handle)
+blast_record_list = list(blast_records)
+E_VALUE_THRESH = 1e-35
+for alignment in blast_record.alignments:
+     for hsp in alignment.hsps:
+         if hsp.expect < E_VALUE_THRESH:
+             print '****Alignment****'
+             print 'sequence:' + alignment.title
+             print 'length:', alignment.length
+             print 'e value:', hsp.expect
+             print hsp.query[0:75] + '...'
+             print hsp.match[0:75] + '...'
+             print hsp.sbjct[0:75] + '...'
+            
