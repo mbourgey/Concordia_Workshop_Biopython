@@ -637,7 +637,7 @@ os.system("head my_blast.xml")
 > &nbsp;&nbsp;&nbsp;&nbsp;\<BlastOutput_reference\>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.\</BlastOutput_reference\>   
 >  &nbsp;&nbsp;&nbsp;&nbsp;\<BlastOutput_db\>nr\</BlastOutput_db\>   
 >  &nbsp;&nbsp;&nbsp;&nbsp;\<BlastOutput_query-ID\>Query_56965\</BlastOutput_query-ID\>   
->  &nbsp;&nbsp;&nbsp;&nbsp;\<BlastOutput_query-def\>PGSC0003DMP400040011 PGSC0003DMT400059441 Protein\</BlastOutput_query-def\>   
+>  &nbsp;&nbsp;&nbsp;&nbsp;\<BlastOutput_query-def\>**PGSC0003DMP400040011 PGSC0003DMT400059441 Protein**\</BlastOutput_query-def\>   
 >  &nbsp;&nbsp;&nbsp;&nbsp;\<BlastOutput_query-len\>222\</BlastOutput_query-len\>   
 
 
