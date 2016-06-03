@@ -1,0 +1,105 @@
+LOCUS       XM_002295694             971 bp    mRNA    linear   PLN 28-JUL-2009
+DEFINITION  Thalassiosira pseudonana  mystery mRNA, partial cds.
+ACCESSION   XM_000000000
+VERSION     XM_000000000.1  GI:0000000000
+KEYWORDS    RefSeq.
+SOURCE      Thalassiosira pseudonana Mystery
+  ORGANISM  Thalassiosira pseudonana Mystery
+            Eukaryota; Stramenopiles; Bacillariophyta; Coscinodiscophyceae;
+            Thalassiosirophycidae; Thalassiosirales; Thalassiosiraceae;
+            Thalassiosira.
+REFERENCE   1  (bases 1 to 971)
+  AUTHORS   Bowler,C., Allen,A.E., Badger,J.H., Grimwood,J., Jabbari,K.,
+            Kuo,A., Maheswari,U., Martens,C., Maumus,F., Otillar,R.P.,
+            Rayko,E., Salamov,A., Vandepoele,K., Beszteri,B., Gruber,A.,
+            Heijde,M., Katinka,M., Mock,T., Valentin,K., Verret,F.,
+            Berges,J.A., Brownlee,C., Cadoret,J.P., Chiovitti,A., Choi,C.J.,
+            Coesel,S., De Martino,A., Detter,J.C., Durkin,C., Falciatore,A.,
+            Fournet,J., Haruta,M., Huysman,M.J., Jenkins,B.D., Jiroutova,K.,
+            Jorgensen,R.E., Joubert,Y., Kaplan,A., Kroger,N., Kroth,P.G., La
+            Roche,J., Lindquist,E., Lommer,M., Martin-Jezequel,V., Lopez,P.J.,
+            Lucas,S., Mangogna,M., McGinnis,K., Medlin,L.K., Montsant,A.,
+            Oudot-Le Secq,M.P., Napoli,C., Obornik,M., Parker,M.S., Petit,J.L.,
+            Porcel,B.M., Poulsen,N., Robison,M., Rychlewski,L., Rynearson,T.A.,
+            Schmutz,J., Shapiro,H., Siaut,M., Stanley,M., Sussman,M.R.,
+            Taylor,A.R., Vardi,A., von Dassow,P., Vyverman,W., Willis,A.,
+            Wyrwicz,L.S., Rokhsar,D.S., Weissenbach,J., Armbrust,E.V.,
+            Green,B.R., Van de Peer,Y. and Grigoriev,I.V.
+  TITLE     The Phaeodactylum genome reveals the evolutionary history of diatom
+            genomes
+  JOURNAL   Nature 456 (7219), 239-244 (2008)
+   PUBMED   18923393
+REFERENCE   2  (bases 1 to 971)
+  AUTHORS   Armbrust,E.V., Berges,J.A., Bowler,C., Green,B.R., Martinez,D.,
+            Putnam,N.H., Zhou,S., Allen,A.E., Apt,K.E., Bechner,M.,
+            Brzezinski,M.A., Chaal,B.K., Chiovitti,A., Davis,A.K.,
+            Demarest,M.S., Detter,J.C., Glavina,T., Goodstein,D., Hadi,M.Z.,
+            Hellsten,U., Hildebrand,M., Jenkins,B.D., Jurka,J., Kapitonov,V.V.,
+            Kroger,N., Lau,W.W., Lane,T.W., Larimer,F.W., Lippmeier,J.C.,
+            Lucas,S., Medina,M., Montsant,A., Obornik,M., Parker,M.S.,
+            Palenik,B., Pazour,G.J., Richardson,P.M., Rynearson,T.A.,
+            Saito,M.A., Schwartz,D.C., Thamatrakoln,K., Valentin,K., Vardi,A.,
+            Wilkerson,F.P. and Rokhsar,D.S.
+  TITLE     The genome of the diatom Thalassiosira pseudonana: ecology,
+            evolution, and metabolism
+  JOURNAL   Science 306 (5693), 79-86 (2004)
+   PUBMED   15459382
+REFERENCE   3  (bases 1 to 971)
+  AUTHORS   Grigoriev,I., Grimwood,J., Kuo,A., Otillar,R.P., Salamov,A.,
+            Detter,J.C., Schmutz,J., Lindquist,E., Shapiro,H., Lucas,S.,
+            Glavina del Rio,T., Bruce,D., Pitluck,S., Rokhsar,D. and
+            Armbrust,V.
+  CONSRTM   Diatom Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-SEP-2008) US DOE Joint Genome Institute, 2800
+            Mitchell Drive B100, Walnut Creek, CA 94598-1698, USA
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. This record is derived from an annotated genomic
+            sequence (NC_012070).
+            COMPLETENESS: incomplete on both ends.
+FEATURES             Location/Qualifiers
+     source          1..971
+                     /organism="Thalassiosira pseudonana Mystery"
+                     /mol_type="mRNA"
+                     /strain="00000000"
+                     /db_xref="taxon:00000000"
+                     /chromosome="7"
+     gene            <1..>971
+                     /gene="Mystery"
+                     /locus_tag="Mystery"
+                     /db_xref="GeneID:0000000"
+     CDS             <1..>971
+                     /gene="Mystery"
+                     /locus_tag="Mystery"
+                     /note="Co-localizes with another gene in subnuclear foci"
+                     /codon_start=1
+                     /product="Mystery"
+                     /protein_id="XP_000000000.1"
+                     /db_xref="GI:00000000"
+                     /db_xref="GeneID:Mystery"
+                     /translation="GCDDSLFSDKWIGNHYRWIVWKLAAMERRFPHHLGGHYLTYERV
+                     LKQMKGRYDKELRNFRRPAVRIMLNRDVAASLPVILCVSQILRFKSRPPKGSSSDEIK
+                     EEVRLELTDGWYSLPAVVDEILLKFVEERRIAVGSKLMICNGQLVGSDDGVEPLDDSY
+                     SSSKRDCPLLLGISANNSRLARWDATLGFVPRNNSNLYGGNLLVKSLQDIFIGGGTVP
+                     AIDLVVCKKYPRMFLEQLNGGASIHLTEAEEAARQSEYDSRHQRASERYADDATKECS
+                     EVSSLLFTFFTMKPLPLLWYNLVTDSSFGVHDSHRKSMRMLLLSGKR"
+ORIGIN      
+        1 gggtgcgacg attcattgtt ttcggacaag tggataggca accactaccg gtggattgtc
+       61 tggaagctag cagcaatgga gagacggttt ccacaccatc ttggaggaca ttacttgacg
+      121 tacgagcgtg tgctgaaaca aatgaagggc cgctacgata aggaacttcg taatttcaga
+      181 cggcctgcag tacgcataat gctcaaccga gatgttgcag cgagtttgcc agtcatctta
+      241 tgcgtaagcc aaatccttcg attcaaatca agaccgccaa aaggaagttc ttccgacgag
+      301 atcaaagaag aagtccgact ggagttgacg gatggatggt actcactacc tgctgtagtg
+      361 gacgaaatac tgttgaagtt tgttgaagaa aggagaatcg cagtgggatc aaaactaatg
+      421 atttgcaatg ggcagttagt tggatctgat gacggagtgg agcctctcga tgacagctac
+      481 tcatcttcca aacgagattg tcctctattg ctgggcatct ctgccaacaa ctcccgttta
+      541 gcaagatggg atgcaactct aggttttgta cctcgcaaca actctaatct atacggcggc
+      601 aatcttttgg tcaaatccct gcaagacatt ttcatcggcg gaggtactgt tccggctatt
+      661 gatttggttg tttgtaagaa gtacccaagg atgtttctag agcaattaaa cggtggagct
+      721 tccattcatc ttacagaagc cgaagaagca gcacgccaaa gtgagtacga ttcaaggcat
+      781 cagcgagcaa gcgagagata tgccgacgat gctacgaagg aatgttcaga ggtaagttca
+      841 ttgctgttca cattcttcac tatgaagcca cttccgttgc tttggtacaa tcttgtcact
+      901 gactcatctt ttggcgttca tgattcgcac aggaaatcga tgaggatgct cctactcagt
+      961 ggaaagagat g
+//
+

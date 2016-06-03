@@ -13,7 +13,7 @@ During this wiorkshop you will learn:
  - Annotate Sequence Objects
  - Read/write Fasta file
  - Blasting Sequences
- - Searching over Pubmed database
+
 
  
 
@@ -759,7 +759,7 @@ for alignment in blast_record.alignments:
 > length: 792   
 > e value: 1.91084e-36   
 > SVEILTSVAKKVHMQLQNAEFHIQADMGRITSLNKLKRKHVEEVLQEKLQHLSSIYERCKEEVTRHLQDCKSTLQ...   
-> S   EIL   SVA+K+HMQLQNAEF   IQADMGRITSLNK   KRKHVEEVLQEK   QHLS+IYER   KEEVTRHLQDCKSTL+...   
+> S EIL SVA+K+HMQLQNAEF IQADMGRITSLNK KRKHVEEVLQEK QHLS+IYER KEEVTRHLQDCKSTL+...   
 > SAEILNSVAEKIHMQLQNAEFQIQADMGRITSLNKSKRKHVEEVLQEKQQHLSAIYERFKEEVTRHLQDCKSTLE...   
 
 
@@ -770,6 +770,52 @@ Basically, we can do anything we want to with the info in the BLAST report once 
 [Here are is UML class diagrams for the PSIBlast class] (http://biopython.org/DIST/docs/tutorial/Tutorial.html#fig:psiblastrecord)
 
 
-## The Entrez Object
+# The Other interesting module of Biopython Object
+During this workshop we only scratch the surface of the full potential of Biopython. Many other interesting modules are available, between others:
 
+|module|task|
+|---|---|
+|Bio.Aff|Deal with Affymetrix related data such as cel files|
+|---|---|
+|Bio.Align|Code for dealing with sequence alignments|
+|---|---|
+|Bio.Emboss|Code to interact with the EMBOSS programs|
+|---|---|
+|Bio.Entrez|Provides code to access NCBI over the WWW|
+|Bio.HMM|A selection of Hidden Markov Model code|
+|---|---|
+|Bio.KDTree|KD tree data structure for searching N-dimensional vectors|
+|---|---|
+|Bio.KEGG|This module provides code to work with data from the KEGG database|
+|---|---|
+|Bio.PDB|Classes that deal with macromolecular crystal structures|
+|---|---|
+|Bio.Pathway|BioPython Pathway module|
+|---|---|
+|Bio.Phylo|Package for working with phylogenetic trees|
+|---|---|
+|Bio.PopGen|PopGen: Population Genetics and Genomics library in Python|
+|---|---|
+|Bio.SeqUtils|Miscellaneous functions for dealing with sequences|
+|---|---|
+|...||
 
+**I strongly encourage you to look at he full list of module and to explore those you found relevent with your own research.**
+
+# Homework
+ 
+ You will find a file called [sequence.gbk](data/sequence.gbk) which contain the sequence of Mystery cRNA. The aim of the excerice is to create a script that will take in input any gbk file of a cDNA and do the following:  
+- Extract the DNA sequence
+- Translate it into a RNA sequence
+- Transcript it into a protein sequence
+- Blast the protein sequence against the nr database
+- Retreive the name of the gene (if possible).
+- output every sequence in a specific file using the name of the gene (or unknown if not possible)
+
+You should try to comment your code
+You should try to separated each step in a specific function or method
+
+**There are not one unique solution to do that ! Be creative ! I will add my own implentation soon**
+
+# Aknowledgments
+This tutorial is an adaptation of some part of the one Biopython Tutorial avaialable on-line. I would like to thank the Biopytho team for their fabulous work.
