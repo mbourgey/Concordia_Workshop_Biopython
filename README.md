@@ -632,13 +632,13 @@ os.system("head my_blast.xml")
 > \<?xml version="1.0"?\>   
 > \<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">   
 > \<BlastOutput\>   
->   \<BlastOutput_program\>blastp\</BlastOutput_program\>   
->   \<BlastOutput_version\>BLASTP 2.3.1+\</BlastOutput_version\>   
->   \<BlastOutput_reference\>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.\</BlastOutput_reference\>   
->   \<BlastOutput_db\>nr\</BlastOutput_db\>   
->   \<BlastOutput_query-ID\>Query_56965\</BlastOutput_query-ID\>   
->   \<BlastOutput_query-def\>PGSC0003DMP400040011 PGSC0003DMT400059441 Protein\</BlastOutput_query-def\>   
->   \<BlastOutput_query-len\>222\</BlastOutput_query-len\>   
+>     \<BlastOutput_program\>blastp\</BlastOutput_program\>   
+>     \<BlastOutput_version\>BLASTP 2.3.1+\</BlastOutput_version\>   
+>     \<BlastOutput_reference\>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.\</BlastOutput_reference\>   
+>     \<BlastOutput_db\>nr\</BlastOutput_db\>   
+>     \<BlastOutput_query-ID\>Query_56965\</BlastOutput_query-ID\>   
+>     \<BlastOutput_query-def\>PGSC0003DMP400040011 PGSC0003DMT400059441 Protein\</BlastOutput_query-def\>   
+>     \<BlastOutput_query-len\>222\</BlastOutput_query-len\>   
 
 
 
