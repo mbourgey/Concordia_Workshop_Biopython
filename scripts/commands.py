@@ -49,9 +49,46 @@ simple_seq_r.annotations["evidence"] = "None. I just made it up."
 simple_seq_r.annotations
 
 import random
-simple_seq_r.letter_annotations["phred_quality"] = random.sample(xrange(1, 50),len(simple_seq_r))
+simple_seq_r.letter_annotations["phred_quality"] =  random.sample(xrange(1, 50),len(simple_seq_r))
 simple_seq_r.letter_annotations
 
 simple_seq_r.format('fasta')
 
 simple_seq_r.format('fastq')
+from Bio import SeqIO
+for seq_record in SeqIO.parse("data/NC_000913.fna","fasta"):
+    print(seq_record.id)
+    print(repr(seq_record.seq))
+    print(len(seq_record))
+    print(len(seq_record.features))
+
+for seq_record in SeqIO.parse("data/NC_000913.gbk","genbank"):
+    print(seq_record.id)
+    print(repr(seq_record.seq))
+    print(len(seq_record))
+    print(len(seq_record.features))
+
+identifiers = [seq_record.id for seq_record in SeqIO.parse("data/patato_pep.fasta","fasta")]
+identifiers
+
+records = list(SeqIO.parse("data/patato_pep.fasta","fasta"))
+records[3]
+records_dict = SeqIO.to_dict(SeqIO.parse("data/patato_pep.fasta","fasta"))
+records_dict.keys()
+
+records_dict['PGSC0003DMP400020381']
+records_dict = SeqIO.index("data/patato_pep.fasta","fasta")
+list(records_dict.keys())
+
+records_dict['PGSC0003DMP400020381']
+import os
+SeqIO.write(simple_seq_r, "testOut.fa",  "fasta")
+os.system("cat testOut.fa")
+
+for seq_record in SeqIO.parse("data/patato_pep.fasta","fasta") : 
+  SeqIO.write(seq_record, "testOut.fa",  "fasta")
+
+os.system("cat testOut.fa")
+
+from Bio.Blast import NCBIWWW
+result_handle = NCBIWWW.qblast("blastp", "nr", seq_record.seq)

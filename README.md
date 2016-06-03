@@ -4,7 +4,7 @@
 
 by Mathieu Bourgey, _Ph.D_  
 
-This Workshop is an adaptation of the [general Biopython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
+This Workshop is an adaptation of some interesting point of the [general Biopython tutorial](http://biopython.org/DIST/docs/tutorial/Tutorial.html)
 
 ## Learning objectives
 During this wiorkshop you will learn:  
@@ -197,7 +197,7 @@ my_seq.reverse_complement()
 There is no specific methods in Biopython to only reverse your sequence
 
 
-**Do you know why and how to preoceed ?**   
+**Do you know why and how to proceed ?**   
 [solution](solutions/_reverse.md)
 
 
@@ -490,7 +490,7 @@ For larger files you should consider `.index()`, which works a little differentl
 
 ```{.python}
 records_dict = SeqIO.index("data/patato_pep.fasta","fasta")
-records_dict.keys()
+list(records_dict.keys())
 
 ```
 
@@ -502,10 +502,95 @@ records_dict['PGSC0003DMP400020381']
 
 > SeqRecord(seq=Seq('MLEKDSRDDRLDCVFPSKHDKDSVEEVSSLSSENTRTSNDCSRSNNVDSISSEV...KY*', SingleLetterAlphabet()), id='PGSC0003DMP400020381', name='PGSC0003DMP400020381', description='PGSC0003DMP400020381 PGSC0003DMT400029984 Protein', dbxrefs=[])
 
+Note that `.index()` won’t take a handle, but only a filename. 
 
+`.index_db()` work on even extremely large files since it stores the record information as a file on disk (using an SQLite3 database) rather than in memory. Also, we can index multiple files together (providing all the record identifiers are unique).
+
+`.index_db()` function takes three required arguments:
+
+    - Index filename
+    - List of sequence filenames to index (or a single filename)
+    - File format (lower case string as used in the rest of the SeqIO module). 
+    
+TO DO example
+
+
+**So, which of these methods should you use and why ?** [solution](solutions/_seqIO1.md) 
+
+### writing sequence files
+
+The `.write()` is used to output sequences (writing files). This function taking three arguments: 
+
+ - Some SeqRecord objects. 
+ - A handle or filename to write to. 
+ - A sequence format.
+
+First, let's write a sequence into the file __testOut.fa__ :
+
+```{.python}
+import os
+SeqIO.write(simple_seq_r, "testOut.fa",  "fasta")
+os.system("cat testOut.fa")
+
+```
+> >THX1138 Made up sequence I wish I could write a paper about   
+> AGTACACTGGT
+
+then, let's write a set of patato sequences into the file __testOut.fa__ :
+
+```{.python}
+for seq_record in SeqIO.parse("data/patato_pep.fasta","fasta") : 
+  SeqIO.write(seq_record, "testOut.fa",  "fasta")
+
+os.system("cat testOut.fa")
+
+```
+> >PGSC0003DMP400037883 PGSC0003DMT400056292 Protein   
+> MMIGRDPEIWENPEEFIPERFLNSDIDYFKGQNFELIPFGAGRRGCPGIALGVATINLIL   
+> SNLLYAFDWELPHGMIKEDIDTDGLPGLAMHKKNALCLVPKNYTHT*
+
+
+**Do you notice something strange in testOut.fa ? and explain why ?** [solution](solutions/_seqIO2.md)
+
+
+###### Exercice
+
+**could you write the content data/patato_pep.fasta into testOut.fa ?** [solution](solutions/_seqIO3.md)
 
 
 ## The Blast Class
+Everybody loves BLAST ! How can it get any easier to do comparisons between one of your sequences and every other sequence in the known world?
+
+If you don't know Blast please explore http://blast.ncbi.nlm.nih.gov/Blast.cgi
+
+Dealing with BLAST can be split up into two steps, both of which can be done from within Biopython:
+
+ 1. Running BLAST for your query sequence(s), and getting some output. 
+ 2. Parsing the BLAST output in Python for further analysis.
+
+To do that Biopython provide the specific `Blast` module.
+
+[The detail API of the `Blast` module](http://biopython.org/DIST/docs/api/Bio.Blast-module.html)
+ 
+There are lots of ways you can run BLAST, especially you can run BLAST locally (on your own machine), or run BLAST remotely (on another machine, typically the NCBI servers).
+
+In this workshop we will only focus on the remote way to run blast.
+
+
+### Running BLAST on NCBI servers
+The specific sub-module `Blast.NCBIWWW` allows to call the online version of BLAST through is main function `qblast()`.
+
+This function has three mandatory arguments:
+
+ 1. The blast program to use for the search, as a lower case string. Currently qblast only works with blastn, blastp, blastx, tblast and tblastx.
+ 2. The databases to search against, as a lower case string.
+ 3. The query sequence as a string. This can either be the sequence itself, the sequence in fasta format, or an identifier like a GI number.
+ 
+```{.python}
+from Bio.Blast import NCBIWWW
+result_handle = NCBIWWW.qblast("blastp", "nr", seq_record.seq)
+```
+
 
 
 ## The Entrez Object
