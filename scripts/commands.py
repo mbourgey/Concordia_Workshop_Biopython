@@ -81,6 +81,9 @@ records_dict = SeqIO.index("data/patato_pep.fasta","fasta")
 list(records_dict.keys())
 
 records_dict['PGSC0003DMP400020381']
+patato_pep = SeqIO.index_db("patato_pep.idx", "data/patato_pep.fasta","fasta")
+patato_pep.keys()
+patato_pep['PGSC0003DMP400040011']
 import os
 SeqIO.write(simple_seq_r, "testOut.fa",  "fasta")
 os.system("cat testOut.fa")

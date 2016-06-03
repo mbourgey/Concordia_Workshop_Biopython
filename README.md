@@ -603,10 +603,42 @@ This function has three mandatory arguments:
  2. The databases to search against, as a lower case string.
  3. The query sequence as a string. This can either be the sequence itself, the sequence in fasta format, or an identifier like a GI number.
  
+Note that the default settings on the NCBI BLAST website are not quite the same as the defaults on QBLAST. If you get different results, you’ll need to check the parameters (e.g., the expectation value threshold and the gap values).
+ 
 ```{.python}
 from Bio.Blast import NCBIWWW
-result_handle = NCBIWWW.qblast("blastp", "nr", seq_record.seq)
+result_handle = NCBIWWW.qblast("blastp", "nr", patato_pep['PGSC0003DMP400040011'].seq)
 ```
+
+Supplying just the sequence means that BLAST will assign an identifier for your sequence automatically. You might prefer to use the SeqRecord object’s format method to make a FASTA string (which will include the existing identifier):
+
+```{.python}
+result_handle = NCBIWWW.qblast("blastn", "nr", patato_pep['PGSC0003DMP400040011'].format("fasta"))
+```
+
+### Writing and reading
+Whatever arguments you give the qblast() function, you should get back your results in a handle object (by default in XML format). The next step would be to parse the XML output into Python objects representing the search results, but you might want to save a local copy of the output file first. 
+
+To output the blast result we use the `read()` function:
+
+```{.python}
+save_file = open("my_blast.xml", "w")
+save_file.write(result_handle.read())
+save_file.close()
+result_handle.close()
+os.system("head my_blast.xml")
+```
+
+> <?xml version="1.0"?>   
+> <!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">   
+> <BlastOutput>   
+>   <BlastOutput_program>blastp</BlastOutput_program>   
+>   <BlastOutput_version>BLASTP 2.3.1+</BlastOutput_version>   
+>   <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>   
+>   <BlastOutput_db>nr</BlastOutput_db>   
+>   <BlastOutput_query-ID>Query_56965</BlastOutput_query-ID>   
+>   <BlastOutput_query-def>PGSC0003DMP400040011 PGSC0003DMT400059441 Protein</BlastOutput_query-def>   
+>   <BlastOutput_query-len>222</BlastOutput_query-len>   
 
 
 
