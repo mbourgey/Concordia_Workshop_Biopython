@@ -630,7 +630,7 @@ os.system("head my_blast.xml")
 ```
 
 > \<?xml version="1.0"?\>   
-> \<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd"\>   
+> \<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">   
 > \<BlastOutput\>   
 >   \<BlastOutput_program\>blastp\</BlastOutput_program\>   
 >   \<BlastOutput_version\>BLASTP 2.3.1+\</BlastOutput_version\>   
