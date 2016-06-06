@@ -95,7 +95,7 @@ os.system("cat testOut.fa")
 
 from Bio.Blast import NCBIWWW
 result_handle = NCBIWWW.qblast("blastp", "nr", patato_pep['PGSC0003DMP400040011'].seq)
-result_handle = NCBIWWW.qblast("blastn", "nr", patato_pep['PGSC0003DMP400040011'].format("fasta"))
+result_handle = NCBIWWW.qblast("blastp", "nr", patato_pep['PGSC0003DMP400040011'].format("fasta"))
 save_file = open("my_blast.xml", "w")
 save_file.write(result_handle.read())
 save_file.close()
@@ -121,3 +121,4 @@ for alignment in blast_record.alignments:
              print hsp.match[0:75] + '...'
              print hsp.sbjct[0:75] + '...'
             
+os.system("head data/muscle-patato_pep.clw")

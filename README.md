@@ -13,9 +13,9 @@ During this wiorkshop you will learn:
  - Annotate Sequence Objects
  - Read/write Fasta file
  - Blasting Sequences
+ - Multiple Alignment Sequences 
 
 
- 
 
 ## The Seq Object
 Biological sequences are arguably the central object in Bioinformatics. Biopython sequences are essentially strings of letters like **AGTACACTGGT** as seen in common biological file formats.
@@ -613,7 +613,7 @@ result_handle = NCBIWWW.qblast("blastp", "nr", patato_pep['PGSC0003DMP400040011'
 Supplying just the sequence means that BLAST will assign an identifier for your sequence automatically. You might prefer to use the SeqRecord object’s format method to make a FASTA string (which will include the existing identifier):
 
 ```{.python}
-result_handle = NCBIWWW.qblast("blastn", "nr", patato_pep['PGSC0003DMP400040011'].format("fasta"))
+result_handle = NCBIWWW.qblast("blastp", "nr", patato_pep['PGSC0003DMP400040011'].format("fasta"))
 ```
 
 ### Writing and reading
@@ -769,6 +769,115 @@ Basically, we can do anything we want to with the info in the BLAST report once 
 
 [Here are is UML class diagrams for the PSIBlast class] (http://biopython.org/DIST/docs/tutorial/Tutorial.html#fig:psiblastrecord)
 
+## Multiple Alignment Sequences
+Multiple Sequence Alignments are a collection of multiple sequences which have been aligned together, usually with the insertion of gap characters, such that all the sequence strings are the same length. Alignment can be regarded as a matrix of letters, where each row is held as a SeqRecord object internally.
+
+the `MultipleSeqAlignment` object holds this kind of data, and the `AlignIO` module fis used for reading and writing them as various file formats.
+
+[The detail API of the `AlignIOt` module](http://biopython.org/DIST/docs/api/Bio.AlignIO-module.html)
+
+In this workshop we won't cover the specific modules dedicated to command line wrappers for common multiple sequence alignment tools !
+
+### Parsing or Reading Sequence Alignments
+`AlignIO` contains 2 functions for reading in sequence alignments:
+
+- `read()` - will return a single `MultipleSeqAlignment` object
+- `parse()` - will return an iterator which gives `MultipleSeqAlignment` objects
+
+Both functions expect two mandatory arguments:
+
+- A string specifying a handle to an open file or a filename.
+- A lower case string specifying the alignment format. 
+
+[See here for a full listing of supported formats](http://biopython.org/wiki/AlignIO)
+
+
+And 2 optional arguments:
+
+- The seq_count argument (integer) specifying the number of alignment in case of ambiguous file formats.
+- The alphabet argument allowing to specify the expected alphabet.
+
+#### Singles alignments
+Let's start with a single alignments file which contains the alignments of the 10 differents patato petitides we used previously (file __data/muscle-patato_pep.clw__). The alignments were generated using MUSCLE (MUltiple Sequence Comparison by Log-Expectation) which is a refeence for aligning amino-acide sequences and output in the CLUSTAL format.
+
+First let's look what is inside the file
+
+```{.python}
+os.system("head data/muscle-patato_pep.clw")
+```
+
+> CLUSTAL multiple sequence alignment by MUSCLE (3.8)   
+>   
+>   
+> PGSC0003DMP400022612      ------------------------------------------------------------   
+> PGSC0003DMP400060824      ---------------MQIFVKTLTGKTITLEVESSDTIDNVKAKIQDKEGIPPDQQRL--   
+> PGSC0003DMP400067339      ---------------MGVWKDSNYGKGVIIGVIDT--GILPDHPSFSDVGMPPPPAKWKG   
+> PGSC0003DMP400027454      MPHPTQVVALLKAQQIRHVRLFNADRGMLLALANTGIKVAVSVPNEQILGVGQSNTTAAN   
+> PGSC0003DMP400028584      ------------------MSTSVEPNGAVL--------------LDSTAGSGGGVANSNG   
+> PGSC0003DMP400030628      ------------------------------------------------------------   
+> PGSC0003DMP400020381      ------------------MLEKDSRDDRLDCVFPS---KHDKDSVEEVSSLSSENTRTSN   
+
+We can load this file as follows :
+
+```{.python}
+from Bio import AlignIO
+alignment = AlignIO.read("data/muscle-patato_pep.clw", "clustal")
+print alignment
+```
+
+> SingleLetterAlphabet() alignment with 10 rows and 1294 columns   
+> --------------------------------------------...--- PGSC0003DMP400022612   
+> ---------------MQIFVKTLTGKTITLEVESSDTIDNVKAK...GGF PGSC0003DMP400060824   
+> ---------------MGVWKDSNYGKGVIIGVIDT--GILPDHP...LDK PGSC0003DMP400067339   
+> MPHPTQVVALLKAQQIRHVRLFNADRGMLLALANTGIKVAVSVP...TSS PGSC0003DMP400027454   
+> ------------------MSTSVEPNGAVL--------------...--- PGSC0003DMP400028584   
+> --------------------------------------------...--- PGSC0003DMP400030628   
+> ------------------MLEKDSRDDRLDCVFPS---KHDKDS...--- PGSC0003DMP400020381   
+> --------------------------------------------...--- PGSC0003DMP400040011   
+> MEIGLAVGGAFLSSALNVLFDRLAPHGDLLNMFQKHTDDVQLFE...YL- PGSC0003DMP400032361   
+> --------------------------------------------...--- PGSC0003DMP400037883   
+
+Note in the above output the sequences have been truncated. We could instead write our own code to format this as we please by iterating over the rows as `SeqRecord` objects:
+
+```{.python}
+for record in alignment:
+   print("%s - %s" % (record.seq[1:60], record.id))
+
+```
+
+> ----------------------------------------------------------- - PGSC0003DMP400022612   
+> --------------MQIFVKTLTGKTITLEVESSDTIDNVKAKIQDKEGIPPDQQRL-- - PGSC0003DMP400060824   
+> --------------MGVWKDSNYGKGVIIGVIDT--GILPDHPSFSDVGMPPPPAKWKG - PGSC0003DMP400067339   
+> PHPTQVVALLKAQQIRHVRLFNADRGMLLALANTGIKVAVSVPNEQILGVGQSNTTAAN - PGSC0003DMP400027454   
+> -----------------MSTSVEPNGAVL--------------LDSTAGSGGGVANSNG - PGSC0003DMP400028584   
+> ----------------------------------------------------------- - PGSC0003DMP400030628   
+> -----------------MLEKDSRDDRLDCVFPS---KHDKDSVEEVSSLSSENTRTSN - PGSC0003DMP400020381   
+> ----------------------------------------------------------- - PGSC0003DMP400040011   
+> EIGLAVGGAFLSSALNVLFDRLAPHGDLLNMFQKHTDDVQLFEKLGDILLGLQIVLSDA - PGSC0003DMP400032361   
+> ----------------------------------------------------------- - PGSC0003DMP400037883   
+
+With any supported file format, we can load an alignment in exactly the same way just by changing the format string. For example, use “phylip” for PHYLIP files, “nexus” for NEXUS files or “emboss” for the alignments output by the EMBOSS tools.
+
+
+#### Multiple Alignments
+In general alignments files can contain multiples alignment, and to read these files we must use the `AlignIO.parse()` function.
+
+Suppose you have a multiple alignments file in PHYLIP format (dummy alignments) :
+
+```{.python}
+os.system("head data/dummy_aln.phy")
+```
+> &nbsp;&nbsp;&nbsp;&nbsp;5     6   
+> Alpha     AAACCA   
+> Beta      AAACCC   
+> Gamma     ACCCCA   
+> Delta     CCCAAC   
+> Epsilon   CCCAAA   
+> &nbsp;&nbsp;&nbsp;&nbsp;5     6   
+> Alpha     AAACAA   
+> Beta      AAACCC   
+> Gamma     ACCCAA   
+
 
 # The Other interesting module of Biopython Object
 During this workshop we only scratch the surface of the full potential of Biopython. Many other interesting modules are available, between others:
@@ -776,7 +885,6 @@ During this workshop we only scratch the surface of the full potential of Biopyt
 |module|task|
 |---|---|
 |Bio.Aff|Deal with Affymetrix related data such as cel files|
-|Bio.Align|Code for dealing with sequence alignments|
 |Bio.Emboss|Code to interact with the EMBOSS programs|
 |Bio.Entrez|Provides code to access NCBI over the WWW|
 |Bio.HMM|A selection of Hidden Markov Model code|
