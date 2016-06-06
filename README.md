@@ -821,8 +821,8 @@ We can load this file as follows :
 
 ```{.python}
 from Bio import AlignIO
-alignment = AlignIO.read("data/muscle-patato_pep.clw", "clustal")
-print alignment
+aln_patato = AlignIO.read("data/muscle-patato_pep.clw", "clustal")
+print aln_patato
 ```
 
 > SingleLetterAlphabet() alignment with 10 rows and 1294 columns   
@@ -840,7 +840,7 @@ print alignment
 Note in the above output the sequences have been truncated. We could instead write our own code to format this as we please by iterating over the rows as `SeqRecord` objects:
 
 ```{.python}
-for record in alignment:
+for record in aln_patato:
    print("%s - %s" % (record.seq[1:60], record.id))
 
 ```
@@ -867,16 +867,106 @@ Suppose you have a multiple alignments file in PHYLIP format (dummy alignments) 
 ```{.python}
 os.system("head data/dummy_aln.phy")
 ```
-> &nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;6   
+
+> &nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6   
 > Alpha     AAACCA   
 > Beta      AAACCC   
 > Gamma     ACCCCA   
 > Delta     CCCAAC   
 > Epsilon   CCCAAA   
-> &nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;6   
+> &nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6   
 > Alpha     AAACAA   
 > Beta      AAACCC   
 > Gamma     ACCCAA   
+
+If we wanted to read this in using `AlignIO` we could use:
+
+```{.python}
+aln_dummy = AlignIO.parse("data/dummy_aln.phy", "phylip")
+for alignment in aln_dummy:
+    print alignment
+    print ""
+
+```
+
+> SingleLetterAlphabet() alignment with 5 rows and 6 columns   
+> AAACCA Alpha   
+> AAACCC Beta   
+> ACCCCA Gamma   
+> CCCAAC Delta   
+> CCCAAA Epsilon   
+>    
+> ...   
+> SingleLetterAlphabet() alignment with 5 rows and 6 columns   
+> AAAAAC Alpha   
+> AAACCC Beta   
+> AACAAC Gamma   
+> CCCCCA Delta   
+> CCCAAC Epsilon   
+>    
+
+
+The `.parse()` function returns an iterator. If we want to keep all the alignments in memory at once, then we need to turn the iterator into a list:
+
+```{.python}
+alignments = list(AlignIO.parse("data/dummy_aln.phy", "phylip"))
+second_aln = alignments[1]
+print second_aln
+
+```
+
+> SingleLetterAlphabet() alignment with 5 rows and 6 columns   
+> AAACAA Alpha   
+> AAACCC Beta   
+> ACCCAA Gamma   
+> CCCACC Delta   
+> CCCAAA Epsilon   
+
+
+### Writing Alignments
+Now we’ll look at `AlignIO.write()` which is for alignments output (writing files). 
+
+This function takes 3 arguments: 
+- Some MultipleSeqAlignment objects 
+- A string specifying a handle or a filename to write to
+- A lower case string specifying the sequence format.
+
+We start by creating a MultipleSeqAlignment object the hard way (by hand). Note we create some SeqRecord objects to construct the alignment from.
+
+```{.python}
+from Bio.Alphabet import generic_dna
+from Bio.Align import MultipleSeqAlignment
+align1 = MultipleSeqAlignment([
+    SeqRecord(Seq("ACTGCTAGCTAG", generic_dna), id="toto"),
+    SeqRecord(Seq("ACT-CTAGCTAG", generic_dna), id="titi"),
+    SeqRecord(Seq("ACTGCTAGDTAG", generic_dna), id="tata"),
+])
+
+print align1
+
+```
+
+> DNAAlphabet() alignment with 3 rows and 12 columns   
+> ACTGCTAGCTAG toto   
+> ACT-CTAGCTAG titi   
+> ACTGCTAGDTAG tata   
+
+Now let's try to output, in phylip format, these alignments in a file with patato peptide alignments.
+
+
+```{.python}
+my_alignments = [align1, , aln_patato]
+AlignIO.write(my_alignments, "mixed.phy", "phylip")
+
+```
+
+> Traceback (most recent call last):
+>  ...
+
+
+**What is the source of the error ?** [solution](solutions/_align1.md)
+
+**How can we resolve it ? ** [solution](solutions/_align2.md)
 
 
 # The Other interesting module of Biopython Object
