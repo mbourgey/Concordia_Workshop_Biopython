@@ -77,15 +77,15 @@ os.system("head mixed2.phy")
 
 ```
 
-> &nbsp; 3 12
-> toto  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACTGCTAGCT AG
-> titi  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACT-CTAGCT AG
-> tata  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACTGCTAGDT AG
-> &nbsp; 10 1294
-> PGSC0003DMP400022612  ---------- ---------- ---------- ---------- ----------
-> PGSC0003DMP400060824  ---------- -----MQIFV KTLTGKTITL EVESSDTIDN VKAKIQDKEG
-> PGSC0003DMP400067339  ---------- -----MGVWK DSNYGKGVII GVIDT--GIL PDHPSFSDVG
-> PGSC0003DMP400027454  MPHPTQVVAL LKAQQIRHVR LFNADRGMLL ALANTGIKVA VSVPNEQILG
-> PGSC0003DMP400028584  ---------- --------MS TSVEPNGAVL ---------- ----LDSTAG
+> &nbsp; 3 12   
+> toto  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACTGCTAGCT AG   
+> titi  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACT-CTAGCT AG   
+> tata  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACTGCTAGDT AG   
+> &nbsp; 10 1294   
+> PGSC0003DMP400022612  ---------- ---------- ---------- ---------- ----------   
+> PGSC0003DMP400060824  ---------- -----MQIFV KTLTGKTITL EVESSDTIDN VKAKIQDKEG   
+> PGSC0003DMP400067339  ---------- -----MGVWK DSNYGKGVII GVIDT--GIL PDHPSFSDVG   
+> PGSC0003DMP400027454  MPHPTQVVAL LKAQQIRHVR LFNADRGMLL ALANTGIKVA VSVPNEQILG   
+> PGSC0003DMP400028584  ---------- --------MS TSVEPNGAVL ---------- ----LDSTAG   
 
 
