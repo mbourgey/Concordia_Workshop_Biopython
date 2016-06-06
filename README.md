@@ -867,13 +867,13 @@ Suppose you have a multiple alignments file in PHYLIP format (dummy alignments) 
 ```{.python}
 os.system("head data/dummy_aln.phy")
 ```
-> &nbsp;&nbsp;&nbsp;&nbsp;5     6   
+> &nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;6   
 > Alpha     AAACCA   
 > Beta      AAACCC   
 > Gamma     ACCCCA   
 > Delta     CCCAAC   
 > Epsilon   CCCAAA   
-> &nbsp;&nbsp;&nbsp;&nbsp;5     6   
+> &nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;6   
 > Alpha     AAACAA   
 > Beta      AAACCC   
 > Gamma     ACCCAA   
