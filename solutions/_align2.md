@@ -15,11 +15,11 @@ os.system("head mixed.fa")
 > \>titi <unknown description>   
 > ACT-CTAGCTAG   
 > \>tata <unknown description>   
-> \ACTGCTAGDTAG   
+> ACTGCTAGDTAG   
 > \>PGSC0003DMP400022612   
-> ------------------------------------------------------------   
-> ------------------------------------------------------------   
-> -------MLPFESIEEASMSLGRNLTFGETLWF---------------------------   
+> \------------------------------------------------------------   
+> \------------------------------------------------------------   
+> \-------MLPFESIEEASMSLGRNLTFGETLWF---------------------------   
 
 
 
@@ -52,9 +52,9 @@ os.system("head mixed.phy")
 ```
 
 > &nbsp; 3 &nbsp; 12   
-> toto       ACTGCTAGCT AG   
-> titi       ACT-CTAGCT AG   
-> tata       ACTGCTAGDT AG   
+> toto &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ACTGCTAGCT AG   
+> titi &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ACT-CTAGCT AG   
+> tata &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ACTGCTAGDT AG   
 > &nbsp; 10 &nbsp; 1294   
 > P400022612 ---------- ---------- ---------- ---------- ----------   
 > P400060824 ---------- -----MQIFV KTLTGKTITL EVESSDTIDN VKAKIQDKEG   
