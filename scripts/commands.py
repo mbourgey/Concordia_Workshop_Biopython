@@ -122,3 +122,32 @@ for alignment in blast_record.alignments:
              print hsp.sbjct[0:75] + '...'
             
 os.system("head data/muscle-patato_pep.clw")
+from Bio import AlignIO
+aln_patato = AlignIO.read("data/muscle-patato_pep.clw", "clustal")
+print aln_patato
+for record in aln_patato:
+   print("%s - %s" % (record.seq[1:60], record.id))
+
+os.system("head data/dummy_aln.phy")
+aln_dummy = AlignIO.parse("data/dummy_aln.phy", "phylip")
+for alignment in aln_dummy:
+    print alignment
+    print ""
+
+alignments = list(AlignIO.parse("data/dummy_aln.phy", "phylip"))
+second_aln = alignments[1]
+print second_aln
+
+from Bio.Alphabet import generic_dna
+from Bio.Align import MultipleSeqAlignment
+align1 = MultipleSeqAlignment([
+    SeqRecord(Seq("ACTGCTAGCTAG", generic_dna), id="toto"),
+    SeqRecord(Seq("ACT-CTAGCTAG", generic_dna), id="titi"),
+    SeqRecord(Seq("ACTGCTAGDTAG", generic_dna), id="tata"),
+])
+
+print align1
+
+my_alignments = [align1, aln_patato]
+AlignIO.write(my_alignments, "mixed.phy", "phylip")
+
