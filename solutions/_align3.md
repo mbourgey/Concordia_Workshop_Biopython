@@ -10,7 +10,12 @@ def aln_Convert(input,  output, input_format="clustal", output_format="stockholm
 
 
 aln_Convert("data/muscle-patato_pep.clw","muscle-patato_pep.stk")
+```
 
+> Converted 1 alignments
+
+
+```{.python}
 os.system("head -4 muscle-patato_pep.stk")
 
 ```
