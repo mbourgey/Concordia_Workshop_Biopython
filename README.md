@@ -572,7 +572,7 @@ os.system("cat testOut.fa")
 
 ###### Exercice
 
-**could you write the content data/patato_pep.fasta into testOut.fa ?** [solution](solutions/_seqIO3.md)
+**Could you write the content data/patato_pep.fasta into testOut.fa ?** [solution](solutions/_seqIO3.md)
 
 
 ## The Blast Class
@@ -955,7 +955,7 @@ Now let's try to output, in phylip format, these alignments in a file with patat
 
 
 ```{.python}
-my_alignments = [align1, , aln_patato]
+my_alignments = [align1, aln_patato]
 AlignIO.write(my_alignments, "mixed.phy", "phylip")
 
 ```
@@ -967,6 +967,15 @@ AlignIO.write(my_alignments, "mixed.phy", "phylip")
 **What is the source of the error ?** [solution](solutions/_align1.md)
 
 **How can we resolve it ?** [solution](solutions/_align2.md)
+
+
+Note - As for `SeqIO.wrtie()`, if you tell the `AlignIO.write()` function to write to a file that already exists, the old file will be overwritten without any warning.
+
+
+###### Exercice
+
+**Could you write an alignment converter function (reading,writing) ?** [solution](solutions/_align3.md)
+
 
 
 # The Other interesting module of Biopython Object

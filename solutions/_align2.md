@@ -63,3 +63,29 @@ os.system("head mixed.phy")
 > P400028584 ---------- --------MS TSVEPNGAVL ---------- ----LDSTAG   
 
 
+----------------------
+The best appraoch
+
+
+This a common issue so a specific format have already been developped. `phylip-relaxed` format is a relaxed interpretation of the PHYLIP format which allows long names.
+
+```
+aln_patato = AlignIO.read("data/muscle-patato_pep.clw", "clustal")
+my_alignments2 = [align1, aln_patato]
+AlignIO.write(my_alignments2, "mixed2.phy", "phylip-relaxed")
+os.system("head mixed2.phy")
+
+```
+
+> &nbsp; 3 12
+> toto  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACTGCTAGCT AG
+> titi  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACT-CTAGCT AG
+> tata  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACTGCTAGDT AG
+> &nbsp; 10 1294
+> PGSC0003DMP400022612  ---------- ---------- ---------- ---------- ----------
+> PGSC0003DMP400060824  ---------- -----MQIFV KTLTGKTITL EVESSDTIDN VKAKIQDKEG
+> PGSC0003DMP400067339  ---------- -----MGVWK DSNYGKGVII GVIDT--GIL PDHPSFSDVG
+> PGSC0003DMP400027454  MPHPTQVVAL LKAQQIRHVR LFNADRGMLL ALANTGIKVA VSVPNEQILG
+> PGSC0003DMP400028584  ---------- --------MS TSVEPNGAVL ---------- ----LDSTAG
+
+
