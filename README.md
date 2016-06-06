@@ -148,7 +148,7 @@ Note that it follows the normal conventions for Python strings.
 
 [solution](solutions/_codonExtract.md)
 
-#### concatenate sequence
+#### Concatenate sequence
 You can in principle add any two Seq objects together just like you can with Python strings. But `Seq` object are made for biological data so you the concatenation method only accept to merge sequences with compatible alphabets. You are allowed to concatenate a protein sequence and a DNA sequence.
 
 ```{.python}
@@ -170,7 +170,7 @@ p_seq + my_seq
 
 **If you __realy__ want to do that, how should you do ?** [solution](solutions/_concate.md)
 
-####  Seq as Biological strings
+#### Seq as Biological strings
 
 The `Seq` object is more than a python string with a specific alphabet, it also offers methods specific to facilitate the biology oriented analysis.
 
