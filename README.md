@@ -966,7 +966,7 @@ AlignIO.write(my_alignments, "mixed.phy", "phylip")
 
 **What is the source of the error ?** [solution](solutions/_align1.md)
 
-**How can we resolve it ? ** [solution](solutions/_align2.md)
+**How can we resolve it ?** [solution](solutions/_align2.md)
 
 
 # The Other interesting module of Biopython Object
